@@ -98,9 +98,16 @@ of the simple truth
 that you’re real
 and right there with me.`
     },
+    
+    // --- THIS IS THE ENTRY WITH IMAGE & VIDEO ---
     5: {
         title: "Made for You",
         type: "poem",
+        
+        // 1. PUT YOUR IMAGE LINK HERE (e.g., "myphoto.jpg" or a URL)
+        image: "https://images.unsplash.com/photo-1516961642265-531546e84af2?q=80&w=1000&auto=format&fit=crop", 
+
+        // 2. THE POEM
         body: `There’s a song I’ll sing for you
 about love found far away
 but really every lyric
@@ -109,7 +116,11 @@ is just my heart saying your name.
 No matter the distance
 or night turning into day
 I’m always guided back
-to the girl my heart chose.`
+to the girl my heart chose.`,
+
+        // 3. PUT YOUR YOUTUBE EMBED LINK HERE
+        // Go to YouTube video -> Share -> Embed -> Copy just the 'src' link inside quotes
+        youtube: "https://www.youtube.com/embed/jfKfPfyJRdk?si=SampleVideo" 
     }
 };
 
@@ -130,7 +141,6 @@ let hasReadFirst = false;
 
 // --- Intro Logic ---
 window.addEventListener('load', () => {
-    // Show intro for 3.5 seconds then fade out
     setTimeout(() => {
         introScreen.style.opacity = '0';
         setTimeout(() => {
@@ -145,59 +155,80 @@ entryItems.forEach(item => {
     const id = item.getAttribute('data-id');
     const entryTitle = entries[id].title;
 
-    // Hover ENTER: Change text to title
     item.addEventListener('mouseenter', () => {
         dynamicText.style.opacity = 0;
         dynamicText.style.transform = "translateY(-5px)";
         
         setTimeout(() => {
             dynamicText.textContent = entryTitle;
-            dynamicText.style.color = "#ff6b6b"; // Cute pink on hover
+            dynamicText.style.color = "#ff6b6b"; 
             dynamicText.style.opacity = 1;
             dynamicText.style.transform = "translateY(0)";
         }, 200);
     });
 
-    // Hover LEAVE: Change text back to question
     item.addEventListener('mouseleave', () => {
         dynamicText.style.opacity = 0;
         dynamicText.style.transform = "translateY(5px)";
 
         setTimeout(() => {
             dynamicText.textContent = currentDefaultText;
-            dynamicText.style.color = "#5d5d5d"; // Back to grey
+            dynamicText.style.color = "#5d5d5d"; 
             dynamicText.style.opacity = 1;
             dynamicText.style.transform = "translateY(0)";
         }, 200);
     });
 
-    // CLICK: Open Modal
     item.addEventListener('click', () => {
         openEntry(id);
     });
 });
 
-// --- Modal Logic ---
+// --- Modal Logic (Updated for Media) ---
 function openEntry(id) {
     const entry = entries[id];
     
     modalTitle.textContent = entry.title;
-    modalBody.innerHTML = '';
-    
-    const div = document.createElement('div');
-    div.textContent = entry.body;
-    
-    if (entry.type === 'poem') {
-        div.className = 'poem-style';
-    } else {
-        div.className = 'letter-style';
+    modalBody.innerHTML = ''; // Clear previous content
+
+    // 1. ADD IMAGE (If it exists)
+    if (entry.image) {
+        const img = document.createElement('img');
+        img.src = entry.image;
+        img.className = 'media-image';
+        modalBody.appendChild(img);
     }
     
-    modalBody.appendChild(div);
+    // 2. ADD TEXT
+    const textDiv = document.createElement('div');
+    textDiv.textContent = entry.body;
     
-    // Show modal
+    if (entry.type === 'poem') {
+        textDiv.className = 'poem-style';
+    } else {
+        textDiv.className = 'letter-style';
+    }
+    modalBody.appendChild(textDiv);
+
+    // 3. ADD VIDEO (If it exists)
+    if (entry.youtube) {
+        const videoWrapper = document.createElement('div');
+        videoWrapper.className = 'video-wrapper';
+        
+        // Create the iframe
+        const iframe = document.createElement('iframe');
+        iframe.src = entry.youtube;
+        iframe.title = "YouTube video player";
+        iframe.frameBorder = "0";
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.allowFullscreen = true;
+        
+        videoWrapper.appendChild(iframe);
+        modalBody.appendChild(videoWrapper);
+    }
+    
+    // Show Modal
     modal.classList.remove('hidden');
-    // Tiny delay to trigger CSS transition
     setTimeout(() => {
         modal.classList.add('active');
     }, 10);
@@ -206,7 +237,6 @@ function openEntry(id) {
 function closeModal() {
     modal.classList.remove('active');
     
-    // Switch to "What will you read next?" after first read
     if (!hasReadFirst) {
         hasReadFirst = true;
         currentDefaultText = "What will you read next?";
@@ -215,7 +245,7 @@ function closeModal() {
     
     setTimeout(() => {
         modal.classList.add('hidden');
-    }, 400); // Wait for transition
+    }, 400); 
 }
 
 closeBtn.addEventListener('click', closeModal);
