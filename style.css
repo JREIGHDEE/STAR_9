@@ -1,0 +1,198 @@
+/* --- Base Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #fdf6e3; /* Cream Paper Color */
+    color: #2c2c2c;
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+/* --- Intro Animation --- */
+#intro-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    transition: opacity 1.5s ease-out;
+}
+
+.fade-in-text {
+    color: #fdf6e3;
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    opacity: 0;
+    animation: textFade 3.5s forwards;
+}
+
+@keyframes textFade {
+    0% { opacity: 0; transform: translateY(20px); }
+    40% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Main Interface --- */
+.hidden {
+    display: none !important;
+}
+
+#diary-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    opacity: 0;
+    animation: pageFadeIn 2s forwards;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@keyframes pageFadeIn {
+    to { opacity: 1; }
+}
+
+#question-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #5d4037;
+    transition: opacity 0.5s ease;
+}
+
+/* --- Table of Contents List --- */
+.entry-list {
+    list-style: none;
+    border-left: 3px solid #d7ccc8;
+    padding-left: 25px;
+}
+
+.entry-item {
+    padding: 18px 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 1px dashed #d7ccc8;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.entry-item:hover {
+    padding-left: 25px;
+    background-color: rgba(93, 64, 55, 0.05);
+    color: #5d4037;
+}
+
+.chapter-num {
+    font-weight: bold;
+    color: #8d6e63;
+    font-size: 1.3rem;
+    font-family: 'Dancing Script', cursive;
+}
+
+.chapter-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+/* --- Reading Modal --- */
+#reader-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    animation: modalFadeIn 0.5s forwards;
+}
+
+@keyframes modalFadeIn {
+    to { opacity: 1; }
+}
+
+.paper-content {
+    background: #fffdf0;
+    width: 90%;
+    max-width: 550px;
+    max-height: 85vh;
+    padding: 50px 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    overflow-y: auto;
+    position: relative;
+    border-radius: 4px;
+    
+    /* Lined Paper Effect */
+    background-image: linear-gradient(#ccc 1px, transparent 1px);
+    background-size: 100% 2rem;
+    line-height: 2rem;
+}
+
+/* Custom Scrollbar for Modal */
+.paper-content::-webkit-scrollbar {
+    width: 6px;
+}
+.paper-content::-webkit-scrollbar-thumb {
+    background-color: #d7ccc8;
+    border-radius: 4px;
+}
+
+#close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    cursor: pointer;
+    color: #8d6e63;
+    z-index: 60;
+    line-height: 1;
+}
+
+#close-btn:hover {
+    color: #5d4037;
+}
+
+#modal-title {
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #3e2723;
+    line-height: 2rem;
+}
+
+/* --- Text Formatting Classes --- */
+.poem-style {
+    text-align: center;
+    white-space: pre-wrap;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: #4e342e;
+}
+
+.letter-style {
+    text-align: justify;
+    white-space: pre-wrap; /* Preserves your paragraphs */
+    font-size: 1.2rem;
+    color: #3e2723;
+}
