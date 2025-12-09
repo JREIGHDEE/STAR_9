@@ -3,6 +3,7 @@ const entries = {
     1: {
         title: "Birthdays",
         type: "letter",
+        // Double \n creates a gap between paragraphs. Single \n forces a new line.
         body: `Birthdays never truly felt like my day. I used to sit at those family dinners, watching everyone talk and laugh while I just waited for the night to end. I was physically present, but emotionally somewhere far away. I didn’t feel celebrated just included out of routine.
 
 But then you walked into my 21st birthday and everything changed.
@@ -15,7 +16,7 @@ I remember how you tried every bit of food with me, even when your teeth were hu
 
 Those may seem like tiny things… but they meant everything.
 
-We laughed, we scrolled through reels, When we were too full to eat another bite, we just leaned against each other. In that moment, I realized something:
+We laughed, we scrolled through reels. When we were too full to eat another bite, we just leaned against each other. In that moment, I realized something:
 
 I didn’t want the night to end.
 For once, I wanted time to slow down.
@@ -25,13 +26,9 @@ And for the first time in my life, I didn’t feel like I had to compromise or h
 You made me feel seen. You made me feel chosen. You made me feel loved in a way I had never felt on any birthday before — and in so many moments beyond that night.
 
 Thank you for making my birthday more than a date on a calendar.
-
 Thank you for making me feel like I am worth celebrating.
-
 Thank you for giving my heart its first memory of what a special birthday truly feels like.
-
 You turned my birthday into something special.
-
 You make me feel special.
 
 That's why I'm always grateful for you, and because of that I'll reciprocate your love beyond special days, I love you!`
@@ -104,6 +101,7 @@ and right there with me.`
     },
     
     // --- ENTRY 5: IMAGE, POEM & VIDEO ---
+    // Don't forget to update the image and youtube links!
     5: {
         title: "Made for You",
         type: "poem",
@@ -120,7 +118,7 @@ is just my heart saying your name.
 No matter the distance
 or night turning into day
 I’m always guided back
-to the girl my heart chose.`,
+to the love my heart chose.`,
 
         // 3. YOUR YOUTUBE LINK (must be 'embed' link):
         youtube: "https://www.youtube.com/embed/jfKfPfyJRdk?si=SampleVideo" 
@@ -144,7 +142,6 @@ let hasReadFirst = false;
 
 // --- Intro Logic ---
 window.addEventListener('load', () => {
-    // Show intro for 3.5 seconds then fade out
     setTimeout(() => {
         introScreen.style.opacity = '0';
         setTimeout(() => {
@@ -159,7 +156,7 @@ entryItems.forEach(item => {
     const id = item.getAttribute('data-id');
     const entryTitle = entries[id].title;
 
-    // Hover ENTER: Change text to title
+    // Hover ENTER
     item.addEventListener('mouseenter', () => {
         dynamicText.style.opacity = 0;
         dynamicText.style.transform = "translateY(-5px)";
@@ -172,7 +169,7 @@ entryItems.forEach(item => {
         }, 200);
     });
 
-    // Hover LEAVE: Change text back to question
+    // Hover LEAVE
     item.addEventListener('mouseleave', () => {
         dynamicText.style.opacity = 0;
         dynamicText.style.transform = "translateY(5px)";
@@ -185,7 +182,7 @@ entryItems.forEach(item => {
         }, 200);
     });
 
-    // CLICK: Open Modal
+    // CLICK
     item.addEventListener('click', () => {
         openEntry(id);
     });
@@ -196,9 +193,9 @@ function openEntry(id) {
     const entry = entries[id];
     
     modalTitle.textContent = entry.title;
-    modalBody.innerHTML = ''; // Clear old content
+    modalBody.innerHTML = ''; 
     
-    // 1. Add Image (if present)
+    // 1. Add Image
     if (entry.image) {
         const img = document.createElement('img');
         img.src = entry.image;
@@ -217,7 +214,7 @@ function openEntry(id) {
     }
     modalBody.appendChild(div);
 
-    // 3. Add Video (if present)
+    // 3. Add Video
     if (entry.youtube) {
         const videoWrapper = document.createElement('div');
         videoWrapper.className = 'video-wrapper';
@@ -243,7 +240,7 @@ function openEntry(id) {
 function closeModal() {
     modal.classList.remove('active');
     
-    // Switch to "What will you read next?" after first read
+    // Switch to "Next" logic
     if (!hasReadFirst) {
         hasReadFirst = true;
         currentDefaultText = "What will you read next?";
@@ -252,7 +249,7 @@ function closeModal() {
     
     setTimeout(() => {
         modal.classList.add('hidden');
-    }, 400); // Wait for transition
+    }, 400); 
 }
 
 closeBtn.addEventListener('click', closeModal);
