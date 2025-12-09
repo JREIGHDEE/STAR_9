@@ -121,7 +121,7 @@ I’m always guided back
 to the love my heart chose.`,
 
         // 3. YOUR YOUTUBE LINK (must be 'embed' link):
-        youtube: "https://www.youtube.com/embed/jfKfPfyJRdk?si=SampleVideo" 
+        youtube: "https://www.youtube.com/embed/br8pmexVUzE?si=ouv7xGEOygELZ8BR" 
     }
 };
 
