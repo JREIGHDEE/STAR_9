@@ -5,58 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To My August</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Fonts: 'Dancing Script' for handwriting headers, 'Cormorant Garamond' for body text -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+    <!-- Modern Font Pairing: Playfair Display (Elegant Serif) & Lato (Clean Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Intro Animation Screen -->
+    <!-- Cinematic Intro -->
     <div id="intro-screen">
-        <h1 class="fade-in-text">To my August</h1>
+        <div class="intro-content">
+            <h1 class="blur-reveal">To my August</h1>
+            <p class="subtitle">Happy 8th Month</p>
+        </div>
     </div>
 
-    <!-- Main Diary Interface -->
+    <!-- Main Experience -->
     <main id="diary-container" class="hidden">
-        <header>
-            <h2 id="question-text">What will you read first?</h2>
-        </header>
-
-        <!-- The Table of Contents -->
-        <ul class="entry-list">
-            <li class="entry-item" data-id="1">
-                <span class="chapter-num">I.</span>
-                <span class="chapter-title">Made for You</span>
-            </li>
+        <div class="content-wrapper">
             
-            <li class="entry-item" data-id="2">
-                <span class="chapter-num">II.</span>
-                <span class="chapter-title">Birthdays</span>
-            </li>
+            <!-- Dynamic Header Area -->
+            <header class="dynamic-header">
+                <span class="small-label">The Collection</span>
+                <h2 id="dynamic-text">What will you read first?</h2>
+                <div class="divider-line"></div>
+            </header>
 
-            <li class="entry-item" data-id="3">
-                <span class="chapter-num">III.</span>
-                <span class="chapter-title">Missing You Part 2</span>
-            </li>
+            <!-- Interactive List -->
+            <ul class="entry-list">
+                <li class="entry-item" data-id="1">
+                    <span class="idx">01</span>
+                    <span class="title">Birthdays</span>
+                </li>
 
-            <li class="entry-item" data-id="4">
-                <span class="chapter-num">IV.</span>
-                <span class="chapter-title">Blocks</span>
-            </li>
+                <li class="entry-item" data-id="2">
+                    <span class="idx">02</span>
+                    <span class="title">Missing You Pt. 2</span>
+                </li>
 
-            <li class="entry-item" data-id="5">
-                <span class="chapter-num">V.</span>
-                <span class="chapter-title">Let Me See You</span>
-            </li>
-        </ul>
+                <li class="entry-item" data-id="3">
+                    <span class="idx">03</span>
+                    <span class="title">Blocks</span>
+                </li>
+
+                <li class="entry-item" data-id="4">
+                    <span class="idx">04</span>
+                    <span class="title">Let Me See You</span>
+                </li>
+
+                <li class="entry-item" data-id="5">
+                    <span class="idx">05</span>
+                    <span class="title">Made for You</span>
+                </li>
+            </ul>
+        </div>
     </main>
 
-    <!-- The Paper Overlay (Modal) -->
+    <!-- Modern Reading Modal -->
     <div id="reader-modal" class="hidden">
-        <button id="close-btn">&times;</button>
-        <div class="paper-content">
-            <h2 id="modal-title">Title</h2>
-            <div id="modal-body">
-                <!-- Content injected via JS -->
+        <div class="modal-backdrop"></div>
+        <div class="modal-card">
+            <button id="close-btn">
+                <span class="close-text">Close</span>
+                <span class="close-icon">&times;</span>
+            </button>
+            
+            <div class="scroll-container">
+                <div class="modal-header">
+                    <span class="chapter-mark">Entry</span>
+                    <h2 id="modal-title">Title</h2>
+                </div>
+                <div id="modal-body">
+                    <!-- Content injected via JS -->
+                </div>
+                <div class="signature">
+                    <p>— Yours</p>
+                </div>
             </div>
         </div>
     </div>
