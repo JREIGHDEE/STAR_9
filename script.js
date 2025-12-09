@@ -1,19 +1,6 @@
-// --- The Entries Database ---
+// --- The Entries (Reordered as requested) ---
 const entries = {
     1: {
-        title: "Made for You",
-        type: "poem",
-        body: `There’s a song I’ll sing for you
-about love found far away
-but really every lyric
-is just my heart saying your name.
-
-No matter the distance
-or night turning into day
-I’m always guided back
-to the love my heart chose.`
-    },
-    2: {
         title: "Birthdays",
         type: "letter",
         body: `Birthdays never truly felt like my day. I used to sit at those family dinners, watching everyone talk and laugh while I just waited for the night to end. I was physically present, but emotionally somewhere far away. I didn’t feel celebrated just included out of routine.
@@ -45,8 +32,8 @@ You make me feel special.
 
 That's why I'm always grateful for you, and because of that I'll reciprocate your love beyond special days, I love you!`
     },
-    3: {
-        title: "Missing You Part 2",
+    2: {
+        title: "Missing You Pt. 2",
         type: "letter",
         body: `I know sometimes you tease me, thinking I don’t miss you as much as I say I do, but let me assure you, I do. More than you probably realize. These past few weeks apart have made me discover just how much I want to be near you, to hold you, kiss you, and just exist in your presence.
 
@@ -58,7 +45,7 @@ I may act a little clingy, but it’s only because my heart yearns for you. Bein
 
 I’ve missed you more than words can say, and now, finally, I get to hold you again after reading this hehehehe`
     },
-    4: {
+    3: {
         title: "Blocks",
         type: "letter",
         body: `I’ve been thinking a lot about Minecraft lately, but not because of the game itself. It has always been about us. Even back in grade school, when we were just friends and seatmates, playing together felt different. Single-player always felt off, incomplete somehow. But when we were in the same world, building, exploring, laughing, everything clicked. That’s when the game felt alive, and that’s when I felt happiest.
@@ -71,7 +58,7 @@ It was never about the game. It’s the way we explore together. How we want to 
 
 Single-player always felt incomplete. Like something was missing. But with you there, suddenly the world feels bigger, funnier, more alive. Every little moment turns into a memory worth keeping. It makes something simple like a block game from our childhood into something more, because we made it something more.`
     },
-    5: {
+    4: {
         title: "Let Me See You",
         type: "poem",
         body: `Even when the room is full
@@ -110,90 +97,135 @@ Let my heart be reminded
 of the simple truth
 that you’re real
 and right there with me.`
+    },
+    5: {
+        title: "Made for You",
+        type: "poem",
+        body: `There’s a song I’ll sing for you
+about love found far away
+but really every lyric
+is just my heart saying your name.
+
+No matter the distance
+or night turning into day
+I’m always guided back
+to the girl my heart chose.`
     }
 };
 
-// --- DOM References ---
+// --- DOM Elements ---
 const introScreen = document.getElementById('intro-screen');
 const diaryContainer = document.getElementById('diary-container');
-const questionText = document.getElementById('question-text');
+const dynamicText = document.getElementById('dynamic-text'); // The changing header
 const entryItems = document.querySelectorAll('.entry-item');
+
+// Modal Elements
 const modal = document.getElementById('reader-modal');
 const closeBtn = document.getElementById('close-btn');
 const modalTitle = document.getElementById('modal-title');
 const modalBody = document.getElementById('modal-body');
 
-// --- Intro Animation Logic ---
+// State Variables
+let currentDefaultText = "What will you read first?";
+let hasReadFirst = false;
+
+// --- 1. Intro Animation Sequence ---
 window.addEventListener('load', () => {
-    // Wait for the text animation (3.5s) + a small buffer
+    // Reveal main content after 4.5 seconds
     setTimeout(() => {
-        // Fade out intro screen
         introScreen.style.opacity = '0';
         setTimeout(() => {
             introScreen.style.display = 'none';
             diaryContainer.classList.remove('hidden');
-        }, 1500); // Wait for the opacity fade to finish
-    }, 4000);
+        }, 1500);
+    }, 4500);
 });
 
-// --- Modal Interaction Logic ---
-let hasReadFirst = false;
-
+// --- 2. Hover Interactions (The Unique Feature) ---
 entryItems.forEach(item => {
+    const id = item.getAttribute('data-id');
+    const entryTitle = entries[id].title;
+
+    // Hover Enter: Change header to entry title
+    item.addEventListener('mouseenter', () => {
+        dynamicText.style.opacity = 0; // Quick fade out
+        dynamicText.style.transform = "translateY(-10px)";
+        
+        setTimeout(() => {
+            dynamicText.textContent = entryTitle;
+            dynamicText.style.color = "var(--accent)"; // Change color slightly
+            dynamicText.style.opacity = 1;
+            dynamicText.style.transform = "translateY(0)";
+        }, 200);
+    });
+
+    // Hover Leave: Revert to the question
+    item.addEventListener('mouseleave', () => {
+        dynamicText.style.opacity = 0;
+        dynamicText.style.transform = "translateY(10px)";
+
+        setTimeout(() => {
+            dynamicText.textContent = currentDefaultText;
+            dynamicText.style.color = "var(--text-main)"; // Revert color
+            dynamicText.style.opacity = 1;
+            dynamicText.style.transform = "translateY(0)";
+        }, 200);
+    });
+
+    // Click: Open the entry
     item.addEventListener('click', () => {
-        const id = item.getAttribute('data-id');
         openEntry(id);
     });
 });
 
+// --- 3. Modal Logic ---
 function openEntry(id) {
     const entry = entries[id];
     
-    // Set Title
+    // Populate Modal
     modalTitle.textContent = entry.title;
+    modalBody.innerHTML = '';
     
-    // Set Body text
-    modalBody.innerHTML = ''; // Clear previous content
-    const p = document.createElement('div');
-    p.textContent = entry.body;
+    const div = document.createElement('div');
+    div.textContent = entry.body;
     
-    // Apply styling based on type
     if (entry.type === 'poem') {
-        p.className = 'poem-style';
+        div.className = 'poem-style';
     } else {
-        p.className = 'letter-style';
+        div.className = 'letter-style';
     }
     
-    modalBody.appendChild(p);
+    modalBody.appendChild(div);
     
-    // Show Modal
+    // Show Modal (Add class 'active')
     modal.classList.remove('hidden');
+    // Small delay to allow CSS transition to catch the removal of 'hidden'
+    setTimeout(() => {
+        modal.classList.add('active');
+    }, 10);
 }
 
-// --- Close & Logic for changing "First" to "Next" ---
-closeBtn.addEventListener('click', closeModal);
+function closeModal() {
+    modal.classList.remove('active');
+    
+    // Update the Question Text if it's the first time closing
+    if (!hasReadFirst) {
+        hasReadFirst = true;
+        currentDefaultText = "What will you read next?";
+        // Also update the text currently visible on screen immediately
+        dynamicText.textContent = currentDefaultText;
+    }
 
-// Also close if clicking outside the paper content
+    // Wait for transition to finish before hiding display
+    setTimeout(() => {
+        modal.classList.add('hidden');
+    }, 500);
+}
+
+// Close Events
+closeBtn.addEventListener('click', closeModal);
 modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
+    if (e.target === modal || e.target.classList.contains('modal-backdrop')) {
         closeModal();
     }
 });
-
-function closeModal() {
-    modal.classList.add('hidden');
-    
-    // Check if we need to change the question text
-    if (!hasReadFirst) {
-        // Fade out old text
-        questionText.style.opacity = 0;
-        
-        setTimeout(() => {
-            questionText.textContent = "What will you read next?";
-            // Fade in new text
-            questionText.style.opacity = 1;
-        }, 500); // wait for fade out
-        
-        hasReadFirst = true;
-    }
-}
