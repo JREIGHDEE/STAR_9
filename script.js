@@ -99,13 +99,13 @@ that you’re real
 and right there with me.`
     },
     
-    // --- THIS IS THE ENTRY WITH IMAGE & VIDEO ---
+    // --- ENTRY 5: IMAGE, POEM & VIDEO ---
     5: {
         title: "Made for You",
         type: "poem",
         
-        // 1. PUT YOUR IMAGE LINK HERE (e.g., "myphoto.jpg" or a URL)
-        image: "https://images.unsplash.com/photo-1516961642265-531546e84af2?q=80&w=1000&auto=format&fit=crop", 
+        // 1. YOUR IMAGE LINK:
+        image: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1000&auto=format&fit=crop", 
 
         // 2. THE POEM
         body: `There’s a song I’ll sing for you
@@ -118,8 +118,7 @@ or night turning into day
 I’m always guided back
 to the girl my heart chose.`,
 
-        // 3. PUT YOUR YOUTUBE EMBED LINK HERE
-        // Go to YouTube video -> Share -> Embed -> Copy just the 'src' link inside quotes
+        // 3. YOUR YOUTUBE LINK (must be 'embed' link):
         youtube: "https://www.youtube.com/embed/jfKfPfyJRdk?si=SampleVideo" 
     }
 };
@@ -141,6 +140,7 @@ let hasReadFirst = false;
 
 // --- Intro Logic ---
 window.addEventListener('load', () => {
+    // Show intro for 3.5 seconds then fade out
     setTimeout(() => {
         introScreen.style.opacity = '0';
         setTimeout(() => {
@@ -155,6 +155,7 @@ entryItems.forEach(item => {
     const id = item.getAttribute('data-id');
     const entryTitle = entries[id].title;
 
+    // Hover ENTER: Change text to title
     item.addEventListener('mouseenter', () => {
         dynamicText.style.opacity = 0;
         dynamicText.style.transform = "translateY(-5px)";
@@ -167,6 +168,7 @@ entryItems.forEach(item => {
         }, 200);
     });
 
+    // Hover LEAVE: Change text back to question
     item.addEventListener('mouseleave', () => {
         dynamicText.style.opacity = 0;
         dynamicText.style.transform = "translateY(5px)";
@@ -179,43 +181,43 @@ entryItems.forEach(item => {
         }, 200);
     });
 
+    // CLICK: Open Modal
     item.addEventListener('click', () => {
         openEntry(id);
     });
 });
 
-// --- Modal Logic (Updated for Media) ---
+// --- Modal Logic ---
 function openEntry(id) {
     const entry = entries[id];
     
     modalTitle.textContent = entry.title;
-    modalBody.innerHTML = ''; // Clear previous content
-
-    // 1. ADD IMAGE (If it exists)
+    modalBody.innerHTML = ''; // Clear old content
+    
+    // 1. Add Image (if present)
     if (entry.image) {
         const img = document.createElement('img');
         img.src = entry.image;
         img.className = 'media-image';
         modalBody.appendChild(img);
     }
-    
-    // 2. ADD TEXT
-    const textDiv = document.createElement('div');
-    textDiv.textContent = entry.body;
+
+    // 2. Add Text
+    const div = document.createElement('div');
+    div.textContent = entry.body;
     
     if (entry.type === 'poem') {
-        textDiv.className = 'poem-style';
+        div.className = 'poem-style';
     } else {
-        textDiv.className = 'letter-style';
+        div.className = 'letter-style';
     }
-    modalBody.appendChild(textDiv);
+    modalBody.appendChild(div);
 
-    // 3. ADD VIDEO (If it exists)
+    // 3. Add Video (if present)
     if (entry.youtube) {
         const videoWrapper = document.createElement('div');
         videoWrapper.className = 'video-wrapper';
         
-        // Create the iframe
         const iframe = document.createElement('iframe');
         iframe.src = entry.youtube;
         iframe.title = "YouTube video player";
@@ -227,7 +229,7 @@ function openEntry(id) {
         modalBody.appendChild(videoWrapper);
     }
     
-    // Show Modal
+    // Show modal
     modal.classList.remove('hidden');
     setTimeout(() => {
         modal.classList.add('active');
@@ -237,6 +239,7 @@ function openEntry(id) {
 function closeModal() {
     modal.classList.remove('active');
     
+    // Switch to "What will you read next?" after first read
     if (!hasReadFirst) {
         hasReadFirst = true;
         currentDefaultText = "What will you read next?";
@@ -245,7 +248,7 @@ function closeModal() {
     
     setTimeout(() => {
         modal.classList.add('hidden');
-    }, 400); 
+    }, 400); // Wait for transition
 }
 
 closeBtn.addEventListener('click', closeModal);
