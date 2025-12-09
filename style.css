@@ -316,9 +316,9 @@ body {
 }
 
 #modal-body {
-    font-family: var(--font-hand); /* Handwriting font for body too! */
+    font-family: var(--font-hand);
     font-size: 1.3rem;
-    line-height: 2rem; /* Matches the background lines */
+    line-height: 2rem; 
     color: #333;
 }
 
@@ -328,6 +328,7 @@ body {
     white-space: pre-wrap;
     font-style: italic;
     color: #555;
+    margin-bottom: 20px;
 }
 
 .letter-style {
@@ -344,31 +345,31 @@ body {
 .signed-name {
     font-size: 1.5rem;
     color: #ff6b6b;
+    transform: rotate(-5deg);
+    display: inline-block;
+}
 
-    /* --- Add this to the bottom of style.css --- */
+/* --- Media Styles (Entry 5) --- */
 
-/* The Polaroid Image Style */
+/* Polaroid Image */
 .media-image {
-    width: 85%; /* Not too big, keeps margin */
+    width: 85%;
     display: block;
-    margin: 0 auto 25px auto; /* Centered with space below */
-    border: 10px solid white; /* The white photo border */
-    border-bottom: 30px solid white; /* Thicker bottom like a Polaroid */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15); /* Drop shadow */
-    transform: rotate(-2deg); /* Slight tilt for realism */
+    margin: 0 auto 25px auto;
+    border: 10px solid white;
+    border-bottom: 35px solid white; /* Thicker bottom for Polaroid look */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    transform: rotate(-2deg);
     border-radius: 2px;
     transition: transform 0.3s ease;
 }
+.media-image:hover { transform: rotate(0deg) scale(1.02); }
 
-.media-image:hover {
-    transform: rotate(0deg) scale(1.02); /* Straighten on hover */
-}
-
-/* The YouTube Video Container */
+/* YouTube Video Wrapper */
 .video-wrapper {
     margin-top: 35px;
     position: relative;
-    padding-bottom: 56.25%; /* Creates a 16:9 Aspect Ratio */
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
     height: 0;
     overflow: hidden;
     border-radius: 8px;
@@ -376,14 +377,10 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     background: #000;
 }
-
 .video-wrapper iframe {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-}
-    transform: rotate(-5deg);
-    display: inline-block;
 }
