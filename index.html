@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To My August</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fonts: 'Dancing Script' for handwriting headers, 'Cormorant Garamond' for body text -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Intro Animation Screen -->
+    <div id="intro-screen">
+        <h1 class="fade-in-text">To my August</h1>
+    </div>
+
+    <!-- Main Diary Interface -->
+    <main id="diary-container" class="hidden">
+        <header>
+            <h2 id="question-text">What will you read first?</h2>
+        </header>
+
+        <!-- The Table of Contents -->
+        <ul class="entry-list">
+            <li class="entry-item" data-id="1">
+                <span class="chapter-num">I.</span>
+                <span class="chapter-title">Made for You</span>
+            </li>
+            
+            <li class="entry-item" data-id="2">
+                <span class="chapter-num">II.</span>
+                <span class="chapter-title">Birthdays</span>
+            </li>
+
+            <li class="entry-item" data-id="3">
+                <span class="chapter-num">III.</span>
+                <span class="chapter-title">Missing You Part 2</span>
+            </li>
+
+            <li class="entry-item" data-id="4">
+                <span class="chapter-num">IV.</span>
+                <span class="chapter-title">Blocks</span>
+            </li>
+
+            <li class="entry-item" data-id="5">
+                <span class="chapter-num">V.</span>
+                <span class="chapter-title">Let Me See You</span>
+            </li>
+        </ul>
+    </main>
+
+    <!-- The Paper Overlay (Modal) -->
+    <div id="reader-modal" class="hidden">
+        <button id="close-btn">&times;</button>
+        <div class="paper-content">
+            <h2 id="modal-title">Title</h2>
+            <div id="modal-body">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
