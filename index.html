@@ -5,81 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To My August</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Modern Font Pairing: Playfair Display (Elegant Serif) & Lato (Clean Sans) -->
+    
+    <!-- 1. FontAwesome for Cute Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 2. Google Fonts: 'Patrick Hand' (Handwriting) and 'Nunito' (Rounded Sans) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&family=Patrick+Hand&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Cinematic Intro -->
+    <!-- Cute Intro Screen -->
     <div id="intro-screen">
         <div class="intro-content">
-            <h1 class="blur-reveal">To my August</h1>
+            <div class="heart-icon"><i class="fa-solid fa-heart"></i></div>
+            <h1 class="handwritten-title">To my August</h1>
             <p class="subtitle">Happy 8th Month</p>
         </div>
     </div>
 
-    <!-- Main Experience -->
+    <!-- Main Diary Page -->
     <main id="diary-container" class="hidden">
-        <div class="content-wrapper">
+        
+        <!-- Background Decorations (Doodles) -->
+        <div class="bg-doodle doodle-1"><i class="fa-regular fa-star"></i></div>
+        <div class="bg-doodle doodle-2"><i class="fa-solid fa-cloud"></i></div>
+        <div class="bg-doodle doodle-3"><i class="fa-regular fa-heart"></i></div>
+
+        <div class="journal-wrapper">
             
-            <!-- Dynamic Header Area -->
-            <header class="dynamic-header">
-                <span class="small-label">The Collection</span>
+            <!-- Dynamic Question Header -->
+            <header class="journal-header">
+                <div class="date-badge">
+                    <span>Month</span>
+                    <strong>08</strong>
+                </div>
                 <h2 id="dynamic-text">What will you read first?</h2>
-                <div class="divider-line"></div>
+                <div class="wiggle-line"></div>
             </header>
 
-            <!-- Interactive List -->
+            <!-- The Entry List -->
             <ul class="entry-list">
+                
                 <li class="entry-item" data-id="1">
-                    <span class="idx">01</span>
+                    <div class="icon-box color-1"><i class="fa-solid fa-cake-candles"></i></div>
                     <span class="title">Birthdays</span>
                 </li>
 
                 <li class="entry-item" data-id="2">
-                    <span class="idx">02</span>
+                    <div class="icon-box color-2"><i class="fa-solid fa-cloud-moon"></i></div>
                     <span class="title">Missing You Pt. 2</span>
                 </li>
 
                 <li class="entry-item" data-id="3">
-                    <span class="idx">03</span>
+                    <div class="icon-box color-3"><i class="fa-brands fa-codepen"></i></div> <!-- Cube/Block icon -->
                     <span class="title">Blocks</span>
                 </li>
 
                 <li class="entry-item" data-id="4">
-                    <span class="idx">04</span>
+                    <div class="icon-box color-4"><i class="fa-solid fa-camera-retro"></i></div>
                     <span class="title">Let Me See You</span>
                 </li>
 
+                <!-- Last Entry as requested -->
                 <li class="entry-item" data-id="5">
-                    <span class="idx">05</span>
+                    <div class="icon-box color-5"><i class="fa-solid fa-heart"></i></div>
                     <span class="title">Made for You</span>
                 </li>
             </ul>
         </div>
     </main>
 
-    <!-- Modern Reading Modal -->
+    <!-- The "Taped Paper" Modal -->
     <div id="reader-modal" class="hidden">
         <div class="modal-backdrop"></div>
-        <div class="modal-card">
+        
+        <div class="paper-note">
+            <!-- Visual "Washi Tape" at the top -->
+            <div class="washi-tape"></div>
+            
             <button id="close-btn">
-                <span class="close-text">Close</span>
-                <span class="close-icon">&times;</span>
+                <i class="fa-solid fa-xmark"></i>
             </button>
             
-            <div class="scroll-container">
-                <div class="modal-header">
-                    <span class="chapter-mark">Entry</span>
-                    <h2 id="modal-title">Title</h2>
+            <div class="scroll-content">
+                <div class="note-header">
+                    <i class="fa-solid fa-pen-nib decorative-icon"></i>
+                    <h2 id="modal-title">Title Here</h2>
                 </div>
+                
                 <div id="modal-body">
-                    <!-- Content injected via JS -->
+                    <!-- Text goes here -->
                 </div>
+
                 <div class="signature">
-                    <p>— Yours</p>
+                    <p>with love,</p>
+                    <p class="signed-name">your bf</p> <!-- Change this to your name if you want -->
                 </div>
             </div>
         </div>
