@@ -1,198 +1,339 @@
-/* --- Base Styles --- */
+/* --- Variables & Reset --- */
+:root {
+    --bg-color: #fcfbf9; /* Warm off-white */
+    --text-main: #2a2a2a; /* Soft Black */
+    --text-muted: #8c8c8c;
+    --accent: #b08d85; /* Muted Rose/Earth tone */
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Lato', sans-serif;
+    --transition: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
 }
 
 body {
-    background-color: #fdf6e3; /* Cream Paper Color */
-    color: #2c2c2c;
-    font-family: 'Cormorant Garamond', serif;
-    overflow-x: hidden;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-sans);
     height: 100vh;
+    overflow: hidden; /* Prevent body scroll, handle inside containers */
 }
 
-/* --- Intro Animation --- */
+/* --- 1. Cinematic Intro --- */
 #intro-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #1a1a1a;
+    background-color: #111;
+    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 100;
-    transition: opacity 1.5s ease-out;
+    transition: opacity 1.5s ease;
 }
 
-.fade-in-text {
-    color: #fdf6e3;
-    font-family: 'Dancing Script', cursive;
-    font-size: 3rem;
+.intro-content {
+    text-align: center;
+}
+
+.blur-reveal {
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    font-weight: 400;
+    letter-spacing: -1px;
+    filter: blur(20px);
     opacity: 0;
-    animation: textFade 3.5s forwards;
+    animation: blurIn 2.5s forwards;
+    animation-delay: 0.5s;
 }
 
-@keyframes textFade {
-    0% { opacity: 0; transform: translateY(20px); }
-    40% { opacity: 1; transform: translateY(0); }
-    80% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 1; transform: translateY(0); }
+.subtitle {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+    animation-delay: 2s;
+    color: #888;
 }
 
-/* --- Main Interface --- */
+@keyframes blurIn {
+    0% { filter: blur(20px); opacity: 0; transform: scale(0.95); }
+    100% { filter: blur(0); opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* --- 2. Main Interface --- */
 .hidden {
     display: none !important;
 }
 
 #diary-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    opacity: 0;
-    animation: pageFadeIn 2s forwards;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    opacity: 0;
+    animation: pageFadeIn 1.5s forwards;
 }
 
 @keyframes pageFadeIn {
     to { opacity: 1; }
 }
 
-#question-text {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2.5rem;
+.content-wrapper {
+    width: 90%;
+    max-width: 700px;
     text-align: center;
-    margin-bottom: 50px;
-    color: #5d4037;
-    transition: opacity 0.5s ease;
 }
 
-/* --- Table of Contents List --- */
+/* Dynamic Header */
+.dynamic-header {
+    margin-bottom: 60px;
+    position: relative;
+    height: 120px; /* Fixed height to prevent jumping */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.small-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 15px;
+    display: block;
+}
+
+#dynamic-text {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    font-weight: 400;
+    color: var(--text-main);
+    transition: opacity 0.3s ease, transform 0.4s var(--transition);
+    line-height: 1.1;
+}
+
+.divider-line {
+    width: 1px;
+    height: 40px;
+    background-color: var(--accent);
+    margin: 20px auto 0;
+    opacity: 0.3;
+}
+
+/* The List */
 .entry-list {
     list-style: none;
-    border-left: 3px solid #d7ccc8;
-    padding-left: 25px;
+    text-align: left;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .entry-item {
-    padding: 18px 10px;
+    padding: 25px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
     cursor: pointer;
-    transition: all 0.3s ease;
-    border-bottom: 1px dashed #d7ccc8;
     display: flex;
     align-items: center;
-    gap: 15px;
+    transition: all 0.4s var(--transition);
+    group: hover;
 }
 
 .entry-item:hover {
-    padding-left: 25px;
-    background-color: rgba(93, 64, 55, 0.05);
-    color: #5d4037;
+    padding-left: 20px;
+    border-bottom-color: var(--accent);
 }
 
-.chapter-num {
-    font-weight: bold;
-    color: #8d6e63;
-    font-size: 1.3rem;
-    font-family: 'Dancing Script', cursive;
+.entry-item .idx {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-right: 30px;
+    width: 30px;
+    transition: color 0.3s;
 }
 
-.chapter-title {
-    font-size: 1.6rem;
-    font-weight: 600;
+.entry-item .title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--text-main);
+    transition: color 0.3s;
 }
 
-/* --- Reading Modal --- */
+.entry-item:hover .idx,
+.entry-item:hover .title {
+    color: var(--accent);
+}
+
+/* --- 3. Reader Modal (Modern) --- */
 #reader-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(4px);
-    z-index: 50;
+    z-index: 200;
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
-    animation: modalFadeIn 0.5s forwards;
+    pointer-events: none; /* Block clicks when hidden */
+    transition: opacity 0.5s ease;
 }
 
-@keyframes modalFadeIn {
-    to { opacity: 1; }
+#reader-modal.active {
+    opacity: 1;
+    pointer-events: auto;
 }
 
-.paper-content {
-    background: #fffdf0;
-    width: 90%;
-    max-width: 550px;
-    max-height: 85vh;
-    padding: 50px 40px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-    overflow-y: auto;
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(252, 251, 249, 0.9); /* Opaque warm white */
+    backdrop-filter: blur(10px);
+}
+
+.modal-card {
     position: relative;
-    border-radius: 4px;
-    
-    /* Lined Paper Effect */
-    background-image: linear-gradient(#ccc 1px, transparent 1px);
-    background-size: 100% 2rem;
-    line-height: 2rem;
+    width: 90%;
+    max-width: 600px;
+    height: 85vh;
+    background: #fff;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.03);
+    z-index: 201;
+    transform: translateY(30px);
+    transition: transform 0.6s var(--transition);
+    display: flex;
+    flex-direction: column;
 }
 
-/* Custom Scrollbar for Modal */
-.paper-content::-webkit-scrollbar {
-    width: 6px;
-}
-.paper-content::-webkit-scrollbar-thumb {
-    background-color: #d7ccc8;
-    border-radius: 4px;
+#reader-modal.active .modal-card {
+    transform: translateY(0);
 }
 
+/* Close Button */
 #close-btn {
     position: absolute;
-    top: 15px;
-    right: 20px;
+    top: 30px;
+    right: 30px;
     background: none;
     border: none;
-    font-size: 2.5rem;
     cursor: pointer;
-    color: #8d6e63;
-    z-index: 60;
-    line-height: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 202;
+    transition: opacity 0.3s;
 }
 
 #close-btn:hover {
-    color: #5d4037;
+    opacity: 0.6;
+}
+
+.close-text {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+.close-icon {
+    font-size: 1.5rem;
+    color: var(--text-main);
+    line-height: 1;
+}
+
+/* Content Area */
+.scroll-container {
+    padding: 60px 50px;
+    overflow-y: auto;
+    height: 100%;
+    /* Hide scrollbar visually but allow scroll */
+    scrollbar-width: none; 
+}
+.scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.chapter-mark {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 10px;
 }
 
 #modal-title {
-    text-align: center;
-    font-family: 'Dancing Script', cursive;
+    font-family: var(--font-serif);
     font-size: 2.5rem;
-    margin-bottom: 30px;
-    color: #3e2723;
-    line-height: 2rem;
+    font-weight: 400;
+    color: var(--text-main);
 }
 
-/* --- Text Formatting Classes --- */
+#modal-body {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: #4a4a4a;
+}
+
+/* Specific Styles for Poem vs Letter */
 .poem-style {
     text-align: center;
     white-space: pre-wrap;
     font-style: italic;
-    font-size: 1.3rem;
-    color: #4e342e;
+    color: #2a2a2a;
+    margin-bottom: 40px;
 }
 
 .letter-style {
     text-align: justify;
-    white-space: pre-wrap; /* Preserves your paragraphs */
-    font-size: 1.2rem;
-    color: #3e2723;
+    white-space: pre-wrap;
+    text-indent: 0;
+}
+
+/* Paragraph spacing in letters */
+.letter-style p {
+    margin-bottom: 20px;
+}
+
+.signature {
+    margin-top: 50px;
+    text-align: right;
+    font-style: italic;
+    font-family: var(--font-serif);
+    color: var(--text-muted);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+    #dynamic-text { font-size: 2rem; }
+    .entry-item .title { font-size: 1.2rem; }
+    .modal-card { height: 100vh; width: 100%; max-width: none; border: none; }
+    .scroll-container { padding: 80px 30px; }
 }
