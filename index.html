@@ -6,47 +6,48 @@
     <title>To My August</title>
     <link rel="stylesheet" href="style.css">
     
-    <!-- 1. FontAwesome for Cute Icons -->
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- 2. Google Fonts: 'Patrick Hand' (Handwriting) and 'Nunito' (Rounded Sans) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&family=Patrick+Hand&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Intro Animation Screen -->
+    <!-- Intro Screen -->
     <div id="intro-screen">
         <div class="intro-content">
             <div class="heart-icon"><i class="fa-solid fa-heart"></i></div>
             <h1 class="handwritten-title">To my August</h1>
-            <p class="subtitle">Happy 8th Month!!!</p>
+            <!-- UPDATED: 9th Month -->
+            <p class="subtitle">Happy 9th Month</p>
         </div>
     </div>
 
     <!-- Main Diary Interface -->
     <main id="diary-container" class="hidden">
         
-        <!-- Background Decorations (Floating Doodles) -->
+        <!-- Background Doodles -->
         <div class="bg-doodle doodle-1"><i class="fa-regular fa-star"></i></div>
         <div class="bg-doodle doodle-2"><i class="fa-solid fa-cloud"></i></div>
         <div class="bg-doodle doodle-3"><i class="fa-regular fa-heart"></i></div>
 
         <div class="journal-wrapper">
             
-            <!-- Dynamic Question Header -->
+            <!-- Header -->
             <header class="journal-header">
                 <div class="date-badge">
                     <span>Month</span>
-                    <strong>08</strong>
+                    <!-- UPDATED: 09 -->
+                    <strong>09</strong>
                 </div>
-                <!-- This text changes when hovering over entries -->
                 <h2 id="dynamic-text">What will you read first?</h2>
                 <div class="wiggle-line"></div>
             </header>
 
-            <!-- The Entry List -->
+            <!-- Entry List -->
             <ul class="entry-list">
                 
                 <li class="entry-item" data-id="1">
@@ -60,7 +61,7 @@
                 </li>
 
                 <li class="entry-item" data-id="3">
-                    <div class="icon-box color-3"><i class="fa-brands fa-codepen"></i></div> <!-- Cube/Block icon -->
+                    <div class="icon-box color-3"><i class="fa-brands fa-codepen"></i></div>
                     <span class="title">Blocks</span>
                 </li>
 
@@ -77,12 +78,11 @@
         </div>
     </main>
 
-    <!-- The Reading Modal (Taped Paper Look) -->
+    <!-- Reading Modal -->
     <div id="reader-modal" class="hidden">
         <div class="modal-backdrop"></div>
         
         <div class="paper-note">
-            <!-- Visual "Washi Tape" at the top -->
             <div class="washi-tape"></div>
             
             <button id="close-btn">
@@ -96,12 +96,12 @@
                 </div>
                 
                 <div id="modal-body">
-                    <!-- Content is injected here via JS -->
+                    <!-- Content injected via JS -->
                 </div>
 
                 <div class="signature">
                     <p>with love,</p>
-                    <p class="signed-name">Moon</p> 
+                    <p class="signed-name">your bf</p> 
                 </div>
             </div>
         </div>
