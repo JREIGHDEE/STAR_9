@@ -1,4 +1,4 @@
-// --- The Entries (Reordered as requested) ---
+// --- The Entries Database ---
 const entries = {
     1: {
         title: "Birthdays",
@@ -116,10 +116,9 @@ to the girl my heart chose.`
 // --- DOM Elements ---
 const introScreen = document.getElementById('intro-screen');
 const diaryContainer = document.getElementById('diary-container');
-const dynamicText = document.getElementById('dynamic-text'); // The changing header
+const dynamicText = document.getElementById('dynamic-text');
 const entryItems = document.querySelectorAll('.entry-item');
 
-// Modal Elements
 const modal = document.getElementById('reader-modal');
 const closeBtn = document.getElementById('close-btn');
 const modalTitle = document.getElementById('modal-title');
@@ -129,60 +128,59 @@ const modalBody = document.getElementById('modal-body');
 let currentDefaultText = "What will you read first?";
 let hasReadFirst = false;
 
-// --- 1. Intro Animation Sequence ---
+// --- Intro Logic ---
 window.addEventListener('load', () => {
-    // Reveal main content after 4.5 seconds
+    // Show intro for 3.5 seconds then fade out
     setTimeout(() => {
         introScreen.style.opacity = '0';
         setTimeout(() => {
             introScreen.style.display = 'none';
             diaryContainer.classList.remove('hidden');
-        }, 1500);
-    }, 4500);
+        }, 1000);
+    }, 3500);
 });
 
-// --- 2. Hover Interactions (The Unique Feature) ---
+// --- Hover Interaction Logic ---
 entryItems.forEach(item => {
     const id = item.getAttribute('data-id');
     const entryTitle = entries[id].title;
 
-    // Hover Enter: Change header to entry title
+    // Hover ENTER: Change text to title
     item.addEventListener('mouseenter', () => {
-        dynamicText.style.opacity = 0; // Quick fade out
-        dynamicText.style.transform = "translateY(-10px)";
+        dynamicText.style.opacity = 0;
+        dynamicText.style.transform = "translateY(-5px)";
         
         setTimeout(() => {
             dynamicText.textContent = entryTitle;
-            dynamicText.style.color = "var(--accent)"; // Change color slightly
+            dynamicText.style.color = "#ff6b6b"; // Cute pink on hover
             dynamicText.style.opacity = 1;
             dynamicText.style.transform = "translateY(0)";
         }, 200);
     });
 
-    // Hover Leave: Revert to the question
+    // Hover LEAVE: Change text back to question
     item.addEventListener('mouseleave', () => {
         dynamicText.style.opacity = 0;
-        dynamicText.style.transform = "translateY(10px)";
+        dynamicText.style.transform = "translateY(5px)";
 
         setTimeout(() => {
             dynamicText.textContent = currentDefaultText;
-            dynamicText.style.color = "var(--text-main)"; // Revert color
+            dynamicText.style.color = "#5d5d5d"; // Back to grey
             dynamicText.style.opacity = 1;
             dynamicText.style.transform = "translateY(0)";
         }, 200);
     });
 
-    // Click: Open the entry
+    // CLICK: Open Modal
     item.addEventListener('click', () => {
         openEntry(id);
     });
 });
 
-// --- 3. Modal Logic ---
+// --- Modal Logic ---
 function openEntry(id) {
     const entry = entries[id];
     
-    // Populate Modal
     modalTitle.textContent = entry.title;
     modalBody.innerHTML = '';
     
@@ -197,9 +195,9 @@ function openEntry(id) {
     
     modalBody.appendChild(div);
     
-    // Show Modal (Add class 'active')
+    // Show modal
     modal.classList.remove('hidden');
-    // Small delay to allow CSS transition to catch the removal of 'hidden'
+    // Tiny delay to trigger CSS transition
     setTimeout(() => {
         modal.classList.add('active');
     }, 10);
@@ -208,21 +206,18 @@ function openEntry(id) {
 function closeModal() {
     modal.classList.remove('active');
     
-    // Update the Question Text if it's the first time closing
+    // Switch to "What will you read next?" after first read
     if (!hasReadFirst) {
         hasReadFirst = true;
         currentDefaultText = "What will you read next?";
-        // Also update the text currently visible on screen immediately
         dynamicText.textContent = currentDefaultText;
     }
-
-    // Wait for transition to finish before hiding display
+    
     setTimeout(() => {
         modal.classList.add('hidden');
-    }, 500);
+    }, 400); // Wait for transition
 }
 
-// Close Events
 closeBtn.addEventListener('click', closeModal);
 modal.addEventListener('click', (e) => {
     if (e.target === modal || e.target.classList.contains('modal-backdrop')) {
