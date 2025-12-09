@@ -25,9 +25,13 @@ And for the first time in my life, I didn’t feel like I had to compromise or h
 You made me feel seen. You made me feel chosen. You made me feel loved in a way I had never felt on any birthday before — and in so many moments beyond that night.
 
 Thank you for making my birthday more than a date on a calendar.
+
 Thank you for making me feel like I am worth celebrating.
+
 Thank you for giving my heart its first memory of what a special birthday truly feels like.
+
 You turned my birthday into something special.
+
 You make me feel special.
 
 That's why I'm always grateful for you, and because of that I'll reciprocate your love beyond special days, I love you!`
