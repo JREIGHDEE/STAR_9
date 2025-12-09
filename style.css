@@ -344,6 +344,46 @@ body {
 .signed-name {
     font-size: 1.5rem;
     color: #ff6b6b;
+
+    /* --- Add this to the bottom of style.css --- */
+
+/* The Polaroid Image Style */
+.media-image {
+    width: 85%; /* Not too big, keeps margin */
+    display: block;
+    margin: 0 auto 25px auto; /* Centered with space below */
+    border: 10px solid white; /* The white photo border */
+    border-bottom: 30px solid white; /* Thicker bottom like a Polaroid */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15); /* Drop shadow */
+    transform: rotate(-2deg); /* Slight tilt for realism */
+    border-radius: 2px;
+    transition: transform 0.3s ease;
+}
+
+.media-image:hover {
+    transform: rotate(0deg) scale(1.02); /* Straighten on hover */
+}
+
+/* The YouTube Video Container */
+.video-wrapper {
+    margin-top: 35px;
+    position: relative;
+    padding-bottom: 56.25%; /* Creates a 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 5px solid white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background: #000;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
     transform: rotate(-5deg);
     display: inline-block;
 }
