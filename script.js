@@ -3,7 +3,7 @@ const entries = {
     1: {
         title: "Birthdays",
         type: "letter",
-        // Double \n creates a gap between paragraphs. Single \n forces a new line.
+        // \n\n creates a new paragraph. \n creates a new line.
         body: `Birthdays never truly felt like my day. I used to sit at those family dinners, watching everyone talk and laugh while I just waited for the night to end. I was physically present, but emotionally somewhere far away. I didn’t feel celebrated just included out of routine.
 
 But then you walked into my 21st birthday and everything changed.
@@ -101,13 +101,12 @@ and right there with me.`
     },
     
     // --- ENTRY 5: IMAGE, POEM & VIDEO ---
-    // Don't forget to update the image and youtube links!
     5: {
         title: "Made for You",
         type: "poem",
         
-        // 1. YOUR IMAGE LINK:
-        image: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1000&auto=format&fit=crop", 
+        // 1. YOUR SPECIFIC IMAGE LINK:
+        image: "https://i.ibb.co/KcjqMxB2/9th-hehe.jpg", 
 
         // 2. THE POEM
         body: `There’s a song I’ll sing for you
@@ -120,7 +119,9 @@ or night turning into day
 I’m always guided back
 to the love my heart chose.`,
 
-        // 3. YOUR YOUTUBE LINK (must be 'embed' link):
+        // 3. YOUR YOUTUBE LINK:
+        // IMPORTANT: Replace this link below with the song you want to dedicate to her!
+        // Make sure it is the "embed" link.
         youtube: "https://www.youtube.com/embed/jfKfPfyJRdk?si=SampleVideo" 
     }
 };
@@ -142,6 +143,7 @@ let hasReadFirst = false;
 
 // --- Intro Logic ---
 window.addEventListener('load', () => {
+    // Show intro for 3.5 seconds then fade out
     setTimeout(() => {
         introScreen.style.opacity = '0';
         setTimeout(() => {
@@ -156,20 +158,20 @@ entryItems.forEach(item => {
     const id = item.getAttribute('data-id');
     const entryTitle = entries[id].title;
 
-    // Hover ENTER
+    // Hover ENTER: Change text to title
     item.addEventListener('mouseenter', () => {
         dynamicText.style.opacity = 0;
         dynamicText.style.transform = "translateY(-5px)";
         
         setTimeout(() => {
             dynamicText.textContent = entryTitle;
-            dynamicText.style.color = "#ff6b6b"; 
+            dynamicText.style.color = "#ff6b6b"; // Cute pink
             dynamicText.style.opacity = 1;
             dynamicText.style.transform = "translateY(0)";
         }, 200);
     });
 
-    // Hover LEAVE
+    // Hover LEAVE: Change text back to question
     item.addEventListener('mouseleave', () => {
         dynamicText.style.opacity = 0;
         dynamicText.style.transform = "translateY(5px)";
@@ -182,7 +184,7 @@ entryItems.forEach(item => {
         }, 200);
     });
 
-    // CLICK
+    // CLICK: Open Modal
     item.addEventListener('click', () => {
         openEntry(id);
     });
@@ -193,9 +195,9 @@ function openEntry(id) {
     const entry = entries[id];
     
     modalTitle.textContent = entry.title;
-    modalBody.innerHTML = ''; 
+    modalBody.innerHTML = ''; // Clear previous content
     
-    // 1. Add Image
+    // 1. Add Image (if present)
     if (entry.image) {
         const img = document.createElement('img');
         img.src = entry.image;
@@ -214,7 +216,7 @@ function openEntry(id) {
     }
     modalBody.appendChild(div);
 
-    // 3. Add Video
+    // 3. Add Video (if present)
     if (entry.youtube) {
         const videoWrapper = document.createElement('div');
         videoWrapper.className = 'video-wrapper';
@@ -240,7 +242,7 @@ function openEntry(id) {
 function closeModal() {
     modal.classList.remove('active');
     
-    // Switch to "Next" logic
+    // Switch to "What will you read next?" after first read
     if (!hasReadFirst) {
         hasReadFirst = true;
         currentDefaultText = "What will you read next?";
@@ -249,7 +251,7 @@ function closeModal() {
     
     setTimeout(() => {
         modal.classList.add('hidden');
-    }, 400); 
+    }, 400); // Wait for transition
 }
 
 closeBtn.addEventListener('click', closeModal);
