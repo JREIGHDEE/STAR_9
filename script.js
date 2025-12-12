@@ -122,7 +122,7 @@ to the love my heart chose.`,
         // 3. YOUR YOUTUBE LINK:
         // IMPORTANT: Replace this link below with the song you want to dedicate to her!
         // Make sure it is the "embed" link.
-        youtube: "https://www.youtube.com/embed/jfKfPfyJRdk?si=SampleVideo" 
+        youtube: "https://www.youtube.com/embed/br8pmexVUzE?si=R8QcsruZ7qL5HHZz" 
     }
 };
 
