@@ -107,7 +107,7 @@ and right there with me.`
         type: "poem",
         
         // 1. YOUR IMAGE LINK:
-        image: "<a href="<a href="https://i.ibb.co/KcjqMxB2/9th-hehe.jpg", 
+        image: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1000&auto=format&fit=crop", 
 
         // 2. THE POEM
         body: `There’s a song I’ll sing for you
@@ -121,7 +121,7 @@ I’m always guided back
 to the love my heart chose.`,
 
         // 3. YOUR YOUTUBE LINK (must be 'embed' link):
-        youtube: "https://www.youtube.com/embed/br8pmexVUzE?si=ouv7xGEOygELZ8BR" 
+        youtube: "https://www.youtube.com/embed/jfKfPfyJRdk?si=SampleVideo" 
     }
 };
 
